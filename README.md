@@ -1,2 +1,2 @@
 # React-practice
-All react small concept based project.
+All react-vite small concept based project.
