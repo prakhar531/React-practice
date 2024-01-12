@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 export default function TodoList() {
-    let [todos, setTodos] = useState([]);
+    //creating array of objects to store task and unique id which is generate using uuid npm package
+    let [todos, setTodos] = useState([{ task: "coding", id: uuidv4() }]);
     let [newTodo, setNewTodo] = useState("");
 
     let addNewTodo = () => {
-        setTodos([...todos, newTodo]);
+        setTodos([...todos, { task: newTodo, id: uuidv4() }]);
         setNewTodo("");
     }
     let updateTodoValue = (event) => {
@@ -23,7 +26,7 @@ export default function TodoList() {
             <ul>
                 {
                     todos.map((todo) => (
-                        <li>{todo}</li>
+                        <li key={todo.id}>{todo.task}</li>
                     ))
                 }
             </ul>
