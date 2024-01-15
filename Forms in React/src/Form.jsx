@@ -18,7 +18,6 @@ export default function Form() {
         setformData((currData) => {
             return { ...currData, [fieldName]: newValue };
         });
-
     };
 
     let handleSubmit = (event) => {
