@@ -24,10 +24,9 @@ export default function SearchBox({ updateInfo }) {
                 feelsLike: jsonResponse.main.feels_Like,
                 weather: jsonResponse.weather[0].description,
             }
-            console.log(result);
             return result;
         } catch (err) {
-            setError("No such place in api");
+            throw err;
         }
     };
 
@@ -36,11 +35,16 @@ export default function SearchBox({ updateInfo }) {
     }
 
     let handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(city);
-        setCity("");
-        let newinfo = await getWeatherInfo();
-        updateInfo(newinfo);
+        try {
+            event.preventDefault();
+            console.log(city);
+            setCity("");
+            let newinfo = await getWeatherInfo();
+            updateInfo(newinfo);
+
+        } catch (err) {
+            setError("No such place in api");
+        }
     }
 
     return (
@@ -55,8 +59,6 @@ export default function SearchBox({ updateInfo }) {
                     Search
                 </Button>
             </form>
-
-
         </div>
     );
 }
